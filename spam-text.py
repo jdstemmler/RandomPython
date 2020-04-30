@@ -1,6 +1,7 @@
 import pyautogui
 import time
 import os, re
+import glob
 import numpy as np
 import argparse
 from string import punctuation
@@ -24,14 +25,23 @@ def word_by_word(s):
     with open(s, 'r') as f:
         for line in f:
             for word in line.strip().split(' '):
-                pyautogui.write(word.strip(punctuation))
+                pyautogui.write(word.strip())
                 pyautogui.press("enter")
 
 if __name__ == "__main__":
 
     args = parse_args()
     script = args.file
-    fqfn = os.path.join(os.path.abspath('./text'), script)
+
+    match = glob.glob(os.path.join(os.path.abspath('./text'), f"{script}*"))
+    
+    if len(match) == 0:
+        raise ValueError(f"No matching files for {script}")
+    elif len(match) > 1:
+        print("found multiple matching files. Choosing the first one!")
+
+    fqfn = match[0]
+
     if not os.path.isfile(fqfn):
         raise FileNotFoundError(f"{fqfn} not found")
     print(f"Preparing to send {fqfn}")
