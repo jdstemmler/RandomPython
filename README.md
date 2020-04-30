@@ -5,7 +5,7 @@ Piss off your friends really bad!
 
 ## Run Script
 You can either run a file word-by-word:
-```python
+```bash
 python spam-text.py -f bee-movie --mode words
 ```
 ```
@@ -19,7 +19,7 @@ aviation
 ...
 ```
 or line-by-line:
-```python
+```bash
 python spam-text.py -f baby-one-more-time --mode lines
 ```
 ```
